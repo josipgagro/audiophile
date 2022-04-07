@@ -22,7 +22,7 @@ export default {
   },
   watch: {
     isOpen: function () {
-      document.querySelector("#app").classList.toggle("modal--open");
+      document.querySelector("#app").classList.toggle("opened");
     },
   },
 };
@@ -30,32 +30,19 @@ export default {
 
 <style lang="scss">
 .modal {
-  position: fixed;
+  position: absolute;
   z-index: 100;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 15vh;
   left: 1rem;
   right: 1rem;
   padding: 3rem 2rem;
   background: $color-primary-light;
   border-radius: $border-radius;
 
-  &--open {
-    &::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 100vh;
-      width: 100vw;
-      background: rgba($color-black, 0.4);
-      z-index: 1;
-    }
-  }
-
   @include breakpoint(md) {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
     padding: 3rem;
   }
 

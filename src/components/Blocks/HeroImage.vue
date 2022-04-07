@@ -52,13 +52,12 @@ export default {
 
 <style lang="scss" scoped>
 .hero-image {
-  height: 100vh;
+  height: calc(100vh - 2rem - #{v-bind("headerHeight")});
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: calc(0px - #{v-bind("headerHeight")});
 
   @include breakpoint(lg) {
     align-items: baseline;

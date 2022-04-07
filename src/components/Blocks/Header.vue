@@ -1,5 +1,5 @@
 <template>
-  <header :class="[{ '--active': isActive }]">
+  <header :class="[{ '--active': isActive }]" ref="header">
     <div class="wrapper">
       <nav class="navigation">
         <ul class="navigation__list">
@@ -51,11 +51,15 @@ export default {
   data() {
     return {
       isActive: false,
+      appClassList: document.querySelector("#app").classList,
+      positionY: 0,
     };
   },
   methods: {
     toggleMenu: function () {
       this.isActive = !this.isActive;
+      this.appClassList.toggle("opened");
+      window.scrollTo(0, 0);
     },
   },
   computed: {
@@ -67,6 +71,7 @@ export default {
     $route: function () {
       if (this.isActive) {
         this.isActive = false;
+        this.appClassList.remove("opened");
       }
     },
   },
@@ -77,6 +82,7 @@ export default {
 header {
   position: sticky;
   top: 0px;
+  width: 100vw;
   border-bottom: 1px solid rgba($color-white, 0.2);
   z-index: 10;
   background: $color-black;
@@ -90,24 +96,10 @@ header {
   }
 
   &.--active {
-    background: $color-black;
+    position: absolute;
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: $color-black;
-      opacity: 0.4;
-      z-index: -1;
-      min-height: 100vh;
-
-      @include breakpoint(md) {
-        width: calc(100% + ($gap-x-mid * 2));
-        left: -($gap-x-mid);
-      }
+    @include breakpoint(md) {
+      position: sticky;
     }
   }
 }

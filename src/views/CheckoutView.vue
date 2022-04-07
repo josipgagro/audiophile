@@ -206,7 +206,7 @@ export default {
     finishOrder: function () {
       this.$store.commit("removeCart");
       this.$router.push("/");
-      document.querySelector("#app").classList.remove("modal--open");
+      document.querySelector("#app").classList.remove("opened");
     },
     toggleModal: function () {
       this.isModalOpen = !this.isModalOpen;
@@ -220,7 +220,9 @@ export default {
 
 <style lang="scss" scoped>
 .checkout {
-  padding: 5rem 0 2rem;
+  @include breakpoint(lg) {
+    padding: 5rem 0 2rem;
+  }
 
   &__title {
     margin-bottom: 0.5em;

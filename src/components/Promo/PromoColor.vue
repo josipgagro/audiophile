@@ -80,8 +80,6 @@ export default {
   &__img {
     width: 50%;
     margin-bottom: 2rem;
-    position: relative;
-    z-index: 1;
 
     @include breakpoint(md) {
       width: 30%;
@@ -98,9 +96,6 @@ export default {
   }
 
   &__container {
-    position: relative;
-    z-index: 1;
-
     @include breakpoint(md) {
       width: 50%;
     }

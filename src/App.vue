@@ -1,7 +1,7 @@
 <template>
   <template v-if="products?.length > 0">
     <Header />
-    <div class="wrapper container">
+    <div class="wrapper container content">
       <router-view />
       <About />
     </div>
@@ -29,3 +29,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.content {
+  overflow-x: hidden;
+}
+</style>
