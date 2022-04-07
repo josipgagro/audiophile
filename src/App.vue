@@ -33,5 +33,9 @@ export default {
 <style lang="scss">
 .content {
   overflow-x: hidden;
+
+  @include breakpoint(md) {
+    overflow-x: visible;
+  }
 }
 </style>
