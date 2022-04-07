@@ -206,6 +206,7 @@ export default {
     finishOrder: function () {
       this.$store.commit("removeCart");
       this.$router.push("/");
+      document.querySelector("#app").classList.remove("modal--open");
     },
     toggleModal: function () {
       this.isModalOpen = !this.isModalOpen;
