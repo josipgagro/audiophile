@@ -1,25 +1,57 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import store from "@/store/index";
+
+import HomeView from "../views/HomeView.vue";
+import CategoryView from "../views/CategoryView.vue";
+import ProductDetalPage from "../views/ProductDetailView.vue";
+import CartView from "../views/CartView.vue";
+import CheckoutView from "../views/CheckoutView.vue";
+import NotFoundView from "../views/NotFoundView.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: HomeView,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: "/category/:category",
+    name: "category",
+    component: CategoryView,
+  },
+  {
+    path: "/product-detail/:productId",
+    name: "product-detail",
+    component: ProductDetalPage,
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: CartView,
+  },
+  {
+    path: "/checkout",
+    name: "checkout",
+    component: CheckoutView,
+    beforeEnter(to, from) {
+      if (store.state.cart.length === 0) {
+        return "/cart";
+      }
+    },
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: NotFoundView,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  base: process.env.BASE_URL,
+  routes,
+  scrollBehavior() {
+    document.getElementById("app").scrollIntoView();
+  },
+});
 
-export default router
+export default router;

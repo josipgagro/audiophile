@@ -1,30 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <template v-if="products?.length > 0">
+    <Header />
+    <div class="wrapper container">
+      <router-view />
+      <About />
+    </div>
+    <Footer />
+  </template>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Header from "@/components/Blocks/Header.vue";
+import About from "@/components/Blocks/About.vue";
+import Footer from "@/components/Blocks/Footer.vue";
+import { mapState } from "vuex";
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+export default {
+  components: {
+    Header,
+    About,
+    Footer,
+  },
+  computed: {
+    ...mapState(["products"]),
+  },
+  created() {
+    this.$store.dispatch("getProducts");
+  },
+};
+</script>
