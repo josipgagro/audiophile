@@ -1,5 +1,5 @@
 <template>
-  <section class="checkout">
+  <section class="checkout" ref="checkout">
     <h1 class="checkout__title">Checkout</h1>
     <div class="checkout__container">
       <form @submit.prevent="submitForm">
@@ -201,6 +201,10 @@ export default {
 
       if (isValid) {
         this.toggleModal();
+      } else {
+        this.$refs.checkout.scrollIntoView({
+          behavior: "smooth",
+        });
       }
     },
     finishOrder: function () {
