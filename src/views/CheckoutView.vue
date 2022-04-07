@@ -202,8 +202,8 @@ export default {
       if (isValid) {
         this.toggleModal();
       } else {
-        this.$refs.checkout.scrollIntoView({
-          behavior: "smooth",
+        this.$nextTick(() => {
+          document.querySelector(".input-container--error input").focus();
         });
       }
     },
