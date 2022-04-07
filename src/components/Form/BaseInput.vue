@@ -94,6 +94,12 @@ export default {
   &--error {
     input {
       border: 2px solid $color-error;
+
+      &:focus,
+      &:hover {
+        border-color: $color-error;
+        outline: $color-error;
+      }
     }
 
     label {
